@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "openrouter/minimax/minimax-m2.7",
+  "mcp": {
+    "open-brain": {
+      "type": "remote",
+      "url": "OPENBRAIN_URL_PLACEHOLDER"
+    }
+  }
+}

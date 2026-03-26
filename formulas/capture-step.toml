@@ -1,0 +1,49 @@
+
+[[steps]]
+id = "capture-findings"
+title = "Capture work to OpenBrain (mandatory)"
+needs = ["commit-changes"]
+description = """
+Capture what you did to OpenBrain before submitting to the merge queue.
+
+This step is MANDATORY. OpenBrain is the shared memory layer for all agents.
+Without this capture, your work is invisible to parallel agents, future polecats
+picking up related beads, and the Windows coordinator.
+
+**Why before MQ submission:** If your MR is rejected and you fix-and-resubmit,
+the capture already exists. A crash during the verdict wait loses nothing.
+
+**1. Call capture_thought via MCP (preferred):**
+
+Use this exact structure:
+```
+[TASK {{issue}}] [COMPLETED] <YYYY-MM-DD> - <one-line summary>
+
+What was done:
+- <key change made>
+
+Key decisions:
+- <non-obvious choices and why, or "none">
+
+Errors fixed (if any):
+- <exact error + root cause + fix, or "none">
+
+Files changed:
+- <file path>: <what changed>
+```
+
+**2. Update bead notes:**
+```bash
+bd update {{issue}} --notes "COMPLETED: <summary>. OpenBrain: search [TASK {{issue}}]"
+```
+
+**3. Fallback (only if MCP unavailable):**
+```bash
+date_str=$(date +%Y-%m-%d)
+cat >> ~/gt/session-capture-fallback.md << CAPTURE
+[TASK {{issue}}] [COMPLETED] ${date_str} - <summary>
+CAPTURE
+```
+
+**Exit criteria:** capture_thought called with structured summary AND bead notes
+updated with COMPLETED status. Do NOT proceed to pre-verify without both."""
