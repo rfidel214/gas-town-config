@@ -24,7 +24,7 @@ Gas Town is project-agnostic. This repo is the opinionated config layer that mak
 ## Setup
 
 ```bash
-git clone https://github.com/<your-org>/gastown-config
+git clone https://github.com/rfidel214/gas-town-config
 cd gastown-config
 ./setup.sh
 ```
